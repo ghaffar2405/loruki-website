@@ -1,0 +1,394 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+/*Scope (the root scope. Everything put here works around same style or element*/
+:root {
+    /*-- (system for custom properties)*/
+    --primary-color: #047aed;
+    --secondary-color: #1c3fa8;
+    --dark-color: #002240; /* dark color, blue */
+    --light-color: #f4f4f4; /* light color */
+    --success-color: #5cb95c;
+    --error-color: #d9534f;
+
+}
+
+* {
+    box-sizing: border-box;
+    background: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'lato', sans-serif;
+    color: #333;
+    line-height: 1.6; /* add spaces between the text */
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+h1,
+h2 {
+    font-weight: 300;
+    line-height: 1.2;
+    margin: 10px 0;
+}
+
+p {
+    margin: 10px 0;
+}
+
+img {
+    width: 100%;
+}
+
+code,
+pre {
+    background: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+.hidden {
+    visibility: hidden;
+    height: 0; /* it doesn't takes up any space */
+}
+
+/*Navbar*/
+.navbar {
+    background-color: var(--primary-color);
+    color: #fff;
+    height: 70px;
+}
+
+.navbar ul {
+    display: flex;
+}
+
+.navbar a {
+    color: #fff;
+    padding: 10px;
+    margin: 0 5px;
+}
+
+.navbar a:hover {
+    border-bottom: 2px #fff solid;
+}
+
+.navbar .flex {
+    justify-content: space-between;
+}
+
+/*Showcase*/
+.showcase {
+    height: 400px;
+    background-color: var(--primary-color);
+    color: #fff;
+    position: relative;
+}
+
+.showcase h1 {
+    font-size: 40px;
+}
+.showcase p {
+    margin: 20px 0;
+}
+
+.showcase .grid {
+    /* The overflow makes the scrollbar in from not to show and makes th form go down past the border */
+    overflow: visible;
+    grid-template-columns: 55% 45%; /* 55% for the text part and 45% for the form part. The left part is slightly wider than the right (form) part */
+    gap: 30px;
+}
+
+.showcase-text {
+    animation: slideInFromLeft 1s ease-in;
+}
+
+.showcase-form {
+    position: relative; /* Using relative cuz I want to add top, bottom, right and left */
+    top: 60px; /* This push it down */
+    height: 350px;
+    width: 400px;
+    padding: 40px;
+    z-index: 100; /* This makes sure the form is always in front */
+    justify-self: flex-end; /* This pushes it to the right */
+    animation: slideInFromRight 1s ease-in;
+}
+
+.showcase-form .form-control {
+    margin: 30px 0;
+}
+
+.showcase-form input[type='text'],
+.showcase-form input[type='email'] {
+    border: 0; /* Remove the border */
+    border-bottom: 1px solid #b4becb;
+    width: 100%; /* THis let the line go all the way actross */
+    padding: 3px;
+    font-size: 16px;
+}
+
+.showcase-form input:focus {
+    outline: none;/*This takes away the border when focus (clicked)*/
+}
+
+.showcase::before,
+.showcase::after {
+    content: '';
+    position: absolute;
+    height: 100px;
+    bottom: -70px;
+    right: 0;
+    left: 0;
+    background: #fff; /* This makes the transform looks like its's part of the showcase */
+    -webkit-transform: skewY(-3deg); /* for chrome (This makes it work in chrome)*/
+    -moz-transform: skewY(-3deg); /* safari (This makes it work in safari)*/
+    -ms-transform: skewY(-3deg); /* Microsoft (This makes it work in microsoft)*/
+    transform: skewY(-3deg); /* This makes it shift down little bit to the left */
+
+}
+
+/* Stats */
+.stats {
+    padding-top: 150px;
+    animation: slideInFromBottom 1s ease-in;
+}
+
+.stats-heading {
+    max-width: 500px; /* makes the text into two line */
+    margin: auto; /* makes the text centered */
+}
+/* This target the stats container, then the grid class, the the h3 */
+.stats .grid h3 {
+    font-size: 35px;
+}
+
+.stats .grid p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* cli */
+.cli .grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+/* this should make the first child,
+ which is the image to make it filled 2 row 2 columns */
+.cli .grid > :first-child {
+    grid-column: 1 / span 2; /* 1row 2 columns */
+    grid-row: 1 / span 2; /* now make it 2 rows 2 columns */
+}
+
+/* cloud */
+.cloud .grid {
+    grid-template-columns: 4, 3fr;
+}
+
+/* Languages */
+/* This will go to the next line when the screen is resize */
+.languages .flex {
+    flex-wrap: wrap;
+}
+
+/* The transition with the transform makes it go up slowly rather than flicking up */
+.languages .card {
+    text-align: center;
+    margin: 18px 10px 40px;
+    transition: transform 0.2s ease-in;
+}
+
+.languages .card h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* This will make it to transform in y axis which is top & bottom,
+   make it flick up when over, the postive value will make it go bottom
+*/
+.languages .card:hover {
+    transform: translateY(-15px);
+}
+
+/* Feautes */
+.features-head img, 
+.docs-head img {
+    width:200px;
+    justify-self: end; /* This pushes it to the right eend of the page */
+}
+
+.features-sub-head img {
+    width:300px;
+    justify-self: flex-end; /* This pushes it to the right eend of the page */
+}
+/* This put space between the icons and text */
+.features-main .card > i {
+    margin-right: 20px;
+}
+
+.features-main .grid {
+    padding: 30px;
+}
+/* the first icon to be span 3 column */
+.features-main .grid > *:first-child {
+    grid-column: 1 / span 3;
+}
+/* the second icon to be span in 2 column */
+.features-main .grid > *:nth-child(2) {
+    grid-column: 1 / span 2;
+}
+
+/* Docs */
+.docs-main h3 {
+    margin: 20px 0;
+}
+/* the 2fr for the introductionmakes it wider */
+.docs-main .grid {
+    grid-template-columns: 1fr 2fr; 
+    align-items: flex-start;
+}
+
+.docs-main nav li {
+    font-size: 17px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px #ccc solid;
+}
+
+.docs-main a:hover {
+    font-weight: bold;
+}
+/* Footer */
+.footer .social a {
+    margin: 0 10px;
+}
+
+/* Animations */
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%); /* negative vlues makes it start from left */
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%); 
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slideInFromTop {
+    0% {
+        transform: translateY(-100%); 
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slideInFromBottom {
+    0% {
+        transform: translateY(100%); /* negative value make it start from top */
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+/* Tablets and under */
+@media (max-width: 768px) {
+    /* This will make everything be in 1n column and 1row,
+    instead of multiples we set above.
+    They stack on each other*/
+    .grid,
+    .showcase .grid,
+    .stats .grid,
+    .cli .grid,
+    .cloud .grid,
+    .features-main .grid,
+    .docs-main .grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    }
+    /* This takes the amount of the container */
+    .showcase {
+        height: auto;
+    }
+
+    .showcase-text {
+        text-align: center;
+        margin-top: 40px;
+        animation: slideInFromTop 1s ease-in;
+    }
+
+    /* This justify all of the element inside */
+    .showcase-form {
+        justify-self: center;
+        margin: auto;
+        animation: slideInFromBottom 1s ease-in;
+    }
+
+    .cli .grid > *:first-child {
+        grid-column: 1; /* 1row 1columns */
+        grid-row: 1; /*1 rows 1 columns */
+    }
+
+    .features-head,
+    .features-sub-head,
+    .docs-head {
+        text-align: center;
+    }
+
+    .features-head img,
+    .features-sub-head img,
+    .docs-head img {
+        justify-self: center;
+    }
+    /* make everything be in 1 column each & stack */
+    .features-main .grid > *:first-child,
+    .features-main .grid > *:nth-child(2) {
+        grid-column: 1;
+    }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+    .navbar {
+        height: 110px;
+    }
+
+    .navbar .flex {
+        flex-direction: column; /* This put the logo and nav on top of each other */
+    }
+
+    .navbar ul {
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    /* This justify all of the element inside */
+    .showcase-form {
+        justify-self: center;
+        margin: auto;
+    }
+
+    .cli .grid > :first-child {
+        grid-column: 1; /* 1row 1columns */
+        grid-row: 1; /* now make it 1 rows 1 columns */
+    }
+}
